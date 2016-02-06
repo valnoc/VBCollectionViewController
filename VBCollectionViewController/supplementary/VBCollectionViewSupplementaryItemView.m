@@ -22,23 +22,43 @@
 //    SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "VBCollectionViewSupplementaryItemView.h"
 
-/**
- *  VBCollectionViewCell is a base class for collection cell.
- */
-@interface VBCollectionViewCell : UICollectionViewCell
+@implementation VBCollectionViewSupplementaryItemView
 
-#pragma mark - reuse identifier
-/**
- *  @return Identifier for reusability.
- */
-+ (nonnull NSString *) reuseIdentifier;
+- (instancetype) init {
+    self = [super init];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
 
-#pragma mark - setup
-/**
- *  Implement in subclass for manual ui constructing.
- */
-- (void) setupUI;
+- (instancetype) initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
+
+#pragma mark - item
+- (void) setItem:(id)item {
+    _item = item;
+    
+    [self prepareForReuse];
+    [self updateUI];
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
+
+#pragma mark - ui
+- (void) setupUI {
+}
+- (void) prepareForReuse {
+}
+- (void) updateUI {
+}
 
 @end

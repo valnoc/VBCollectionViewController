@@ -55,9 +55,4 @@
 - (void) setupUI {
 }
 
-#pragma mark - height
-+ (CGFloat) estimatedHeight {
-    return 44.0f;
-}
-
 @end

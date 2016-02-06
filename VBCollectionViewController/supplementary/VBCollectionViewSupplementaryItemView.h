@@ -22,23 +22,32 @@
 //    SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "VBCollectionViewSupplementaryView.h"
 
 /**
- *  VBCollectionViewCell is a base class for collection cell.
+ *  VBCollectionViewSupplementaryItemView is a header-footer view to show entity.
  */
-@interface VBCollectionViewCell : UICollectionViewCell
+@interface VBCollectionViewSupplementaryItemView : VBCollectionViewSupplementaryView
 
-#pragma mark - reuse identifier
 /**
- *  @return Identifier for reusability.
+ *  Setting of new item causes chain: prepareForReuse, updateUI, updateLayout
  */
-+ (nonnull NSString *) reuseIdentifier;
+@property (nonatomic, strong, nullable) id item;
 
-#pragma mark - setup
+#pragma mark - ui
 /**
- *  Implement in subclass for manual ui constructing.
+ *  Setup view UI - add and configure subviews.
  */
 - (void) setupUI;
+
+/**
+ *  Clear all item-dependent UI information.
+ */
+- (void) prepareForReuse;
+
+/**
+ *  Update UI with current item.
+ */
+- (void) updateUI;
 
 @end

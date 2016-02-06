@@ -25,9 +25,9 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  VBCollectionViewCell is a base class for collection cell.
+ *  VBCollectionViewSupplementaryView is a base class for collection header-footer.
  */
-@interface VBCollectionViewCell : UICollectionViewCell
+@interface VBCollectionViewSupplementaryView : UICollectionReusableView
 
 #pragma mark - reuse identifier
 /**

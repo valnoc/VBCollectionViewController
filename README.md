@@ -1,9 +1,11 @@
 VBCollectionViewController
 ===========
 
-VBCollectionViewController extends UICollectionViewController by adding pagination, pull-to-refresh and other useful features.
-VBCollectionViewCell and VBCollectionViewItemCell are useful base classes for cells.
-VBCollectionViewSupplementaryView and VBCollectionViewSupplementaryItemView are useful base classes for supplementary views.
+<b>VBCollectionViewController</b> extends UICollectionViewController by adding pagination, pull-to-refresh and other useful features.
+
+<b>VBCollectionViewCell</b> and <b>VBCollectionViewItemCell</b> are useful base classes for cells.
+
+<b>VBCollectionViewSupplementaryView</b> and <b>VBCollectionViewSupplementaryItemView</b> are useful base classes for supplementary views.
 
 ## How to install
 Use CocoaPods

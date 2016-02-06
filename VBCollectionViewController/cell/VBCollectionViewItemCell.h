@@ -24,6 +24,23 @@
 
 #import "VBCollectionViewCell.h"
 
+#import "VBCollectionViewItemView.h"
+/**
+ *  VBCollectionViewItemCell is a cell constructed to show entity instance via itemView.
+ */
 @interface VBCollectionViewItemCell : VBCollectionViewCell
+
+/**
+ *  Must be implemented in subclass.
+ *  A subclass of VBTableVIewItemView
+ *
+ *  @return Class
+ */
++ (Class) itemViewClass;
+
+/**
+ *  Is created automatically using itemViewClass. can be changed at any time.
+ */
+@property (nonatomic, strong) VBCollectionViewItemView* itemView;
 
 @end

@@ -61,9 +61,9 @@
 
 /**
  * A short version of "register class for reuse identifier".
- * Calls +reuseIdetifier if classToRegister is a subclass of VBTableViewCell.
+ * Calls +reuseIdetifier if classToRegister is a subclass of VBCollectionSupplementaryView.
  * Else - uses stringFromClass as identifier.
  */
-- (void) registerClassForHeaderFooter:(Class) classToRegister;
+- (void) registerClassForSupplementaryView:(Class) classToRegister;
 
 @end

@@ -24,6 +24,8 @@
 
 #import "VBCollectionViewItemCell.h"
 
+#import "VBCollectionViewItemView.h"
+
 #import "VBAutolayout.h"
 #import "VBInvalidClassException.h"
 
@@ -35,13 +37,13 @@
     
     if ([self.class itemViewClass]) {
         self.itemView = [[[self.class itemViewClass] alloc] initWithFrame:self.contentView.bounds];
-        if ([self.itemView isKindOfClass:[VBTableViewItemView class]] == NO) {
+        if ([self.itemView isKindOfClass:[VBCollectionViewItemView class]] == NO) {
             @throw [VBInvalidClassException exception];
         }
     }
 }
 
-- (void) setItemView:(VBTableViewItemView *)itemView {
+- (void) setItemView:(VBCollectionViewItemView *)itemView {
     _itemView = itemView;
     
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];

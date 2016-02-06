@@ -51,6 +51,10 @@
     return NSStringFromClass([self class]);
 }
 
++ (NSString *) kindOfView {
+    return @"headerFooter";
+}
+
 #pragma mark - setup
 - (void) setupUI {
 }

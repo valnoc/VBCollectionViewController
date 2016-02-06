@@ -24,18 +24,61 @@
 
 #import "VBCollectionViewController.h"
 
-@protocol VBCollectionViewDataSource <UICollectionViewDataSource>
+#import <WZProtocolInterceptor/WZProtocolInterceptor.h>
 
-@end
+#import "VBCollectionViewCell.h"
+#import "VBCollectionViewSupplementaryView.h"
 
-@protocol VBCollectionViewDelegate <UICollectionViewDelegate>
+@interface VBCollectionViewController ()
 
-@optional
-- (void) collectionViewDidScrollToNextPage:(UICollectionView*)collectionView;
-- (void) collectionViewDidStartPullToRefresh:(UICollectionView*)collectionView;
+@property (nonatomic, strong) WZProtocolInterceptor* delegateInterceptor;
 
 @end
 
 @implementation VBCollectionViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.collectionView.delegate = self;
+}
+
+#pragma mark - dataSource/delegate
+- (void) setDataSource:(id<VBCollectionViewDataSource>)dataSource {
+    _dataSource = dataSource;
+    self.collectionView.dataSource = dataSource;
+}
+- (void) setDelegate:(id<VBCollectionViewDelegate>)delegate {
+    _delegate = delegate;
+    
+    self.delegateInterceptor = [[WZProtocolInterceptor alloc] initWithInterceptedProtocol:@protocol(VBCollectionViewDelegate)];
+    self.delegateInterceptor.middleMan = self;
+    self.delegateInterceptor.receiver = delegate;
+    
+    self.collectionView.delegate = (id<UICollectionViewDelegate>)self.delegateInterceptor;
+}
+
+#pragma mark - collection
+- (void) registerClassForCell:(Class) classToRegister {
+    if ([classToRegister isSubclassOfClass:[VBCollectionViewCell class]]) {
+        [self.collectionView registerClass:classToRegister
+                forCellWithReuseIdentifier:[classToRegister reuseIdentifier]];
+    }else{
+        [self.collectionView registerClass:classToRegister
+                    forCellReuseIdentifier:NSStringFromClass(classToRegister)];
+    }
+}
+
+- (void) registerClassForSupplementaryView:(Class) classToRegister {
+    if ([classToRegister isSubclassOfClass:[VBCollectionViewSupplementaryView class]]) {
+        [self.collectionView registerClass:classToRegister
+                forSupplementaryViewOfKind:[classToRegister kindOfView]
+                       withReuseIdentifier:[classToRegister reuseIdentifier]];
+    }else{
+        [self.collectionView registerClass:classToRegister
+                forSupplementaryViewOfKind:[VBCollectionViewSupplementaryView kindOfView]
+                       withReuseIdentifier:NSStringFromClass(classToRegister)];
+    }
+}
 
 @end

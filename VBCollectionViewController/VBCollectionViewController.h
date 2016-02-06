@@ -24,6 +24,46 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol VBCollectionViewDataSource <UICollectionViewDataSource>
+
+@end
+
+@protocol VBCollectionViewDelegate <UICollectionViewDelegate>
+
+@optional
+- (void) collectionViewDidScrollToNextPage:(UITableView*)tableView;
+//- (void) collectionViewDidStartPullToRefresh:(UITableView*)tableView;
+
+@end
+
+/**
+ *  VBCollectionViewController extends UICollectionViewController by adding pagination, pull-to-refresh and other useful features.
+ */
 @interface VBCollectionViewController : UICollectionViewController
+
+/**
+ * Use this dataSource property instead of collectionView.dataSource
+ */
+@property (nonatomic, weak) id<VBCollectionViewDataSource> dataSource;
+
+/**
+ * Use this delegate property instead of collectionView.delegate
+ */
+@property (nonatomic, weak) id<VBCollectionViewDelegate> delegate;
+
+#pragma mark - collection
+/**
+ * A short version of "register class for reuse identifier".
+ * Calls +reuseIdetifier if classToRegister is a subclass of VBCollectionViewCell.
+ * Else - uses stringFromClass as identifier.
+ */
+- (void) registerClassForCell:(Class) classToRegister;
+
+/**
+ * A short version of "register class for reuse identifier".
+ * Calls +reuseIdetifier if classToRegister is a subclass of VBTableViewCell.
+ * Else - uses stringFromClass as identifier.
+ */
+- (void) registerClassForHeaderFooter:(Class) classToRegister;
 
 @end

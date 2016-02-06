@@ -31,6 +31,11 @@
 
 #pragma mark - reuse identifier
 /**
+ *  @return Kind of view for reusability.
+ */
++ (nonnull NSString *) kindOfView;
+
+/**
  *  @return Identifier for reusability.
  */
 + (nonnull NSString *) reuseIdentifier;

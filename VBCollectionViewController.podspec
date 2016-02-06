@@ -13,7 +13,10 @@ Pod::Spec.new do |s|
   s.summary          = "VBCollectionViewController"
   s.description      = <<-DESC
 VBCollectionViewController extends UICollectionViewController by adding pagination, pull-to-refresh and other useful features.
-VBCollectionViewCell and VBCollectionViewItemCell are useful base classes.
+
+VBCollectionViewCell and VBCollectionViewItemCell are useful base classes for cells.
+
+VBCollectionViewSupplementaryView and VBCollectionViewSupplementaryItemView are useful base classes for supplementary views.
                        DESC
   s.homepage         = "https://github.com/valnoc/VBCollectionViewController"
   s.license          = 'MIT'

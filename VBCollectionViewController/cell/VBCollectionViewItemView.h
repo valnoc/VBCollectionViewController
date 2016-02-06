@@ -24,6 +24,30 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  VBCollectionViewItemView is a view to show entity.
+ */
 @interface VBCollectionViewItemView : UIView
+
+/**
+ *  Setting of new item causes chain: prepareForReuse, updateUI, updateLayout
+ */
+@property (nonatomic, strong, nullable) id item;
+
+#pragma mark - ui
+/**
+ *  Setup view UI - add and configure subviews.
+ */
+- (void) setupUI;
+
+/**
+ *  Clear all item-dependent UI information.
+ */
+- (void) prepareForReuse;
+
+/**
+ *  Update UI with current item.
+ */
+- (void) updateUI;
 
 @end

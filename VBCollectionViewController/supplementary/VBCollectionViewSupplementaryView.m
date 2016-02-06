@@ -52,7 +52,7 @@
 }
 
 + (NSString *) kindOfView {
-    return @"headerFooter";
+    return UICollectionElementKindSectionHeader;
 }
 
 #pragma mark - setup

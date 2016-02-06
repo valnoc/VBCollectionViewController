@@ -14,6 +14,10 @@
 		5B0A3D1F1C65245A00808F1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B0A3D1E1C65245A00808F1D /* Assets.xcassets */; };
 		5B0A3D221C65245A00808F1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B0A3D201C65245A00808F1D /* LaunchScreen.storyboard */; };
 		5B0A3D2D1C65245A00808F1D /* VBCollectionViewController_ExamplesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0A3D2C1C65245A00808F1D /* VBCollectionViewController_ExamplesTests.m */; };
+		5B0A3D3A1C6533D600808F1D /* VBCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0A3D391C6533D600808F1D /* VBCollectionViewController.m */; };
+		5B0A3D3F1C6538AD00808F1D /* VBCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0A3D3E1C6538AD00808F1D /* VBCollectionViewCell.m */; };
+		5B0A3D421C653CBD00808F1D /* VBCollectionViewItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0A3D411C653CBD00808F1D /* VBCollectionViewItemCell.m */; };
+		5BB05A201C66260400813FD2 /* VBCollectionViewItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB05A1F1C66260400813FD2 /* VBCollectionViewItemView.m */; };
 		E08DFD4B112F722A1D11F299 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E507EB346B29E6BA3A5A40 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +48,14 @@
 		5B0A3D281C65245A00808F1D /* VBCollectionViewController_ExamplesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VBCollectionViewController_ExamplesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B0A3D2C1C65245A00808F1D /* VBCollectionViewController_ExamplesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VBCollectionViewController_ExamplesTests.m; sourceTree = "<group>"; };
 		5B0A3D2E1C65245A00808F1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B0A3D381C6533D600808F1D /* VBCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBCollectionViewController.h; sourceTree = "<group>"; };
+		5B0A3D391C6533D600808F1D /* VBCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCollectionViewController.m; sourceTree = "<group>"; };
+		5B0A3D3D1C6538AD00808F1D /* VBCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBCollectionViewCell.h; sourceTree = "<group>"; };
+		5B0A3D3E1C6538AD00808F1D /* VBCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCollectionViewCell.m; sourceTree = "<group>"; };
+		5B0A3D401C653CBD00808F1D /* VBCollectionViewItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBCollectionViewItemCell.h; sourceTree = "<group>"; };
+		5B0A3D411C653CBD00808F1D /* VBCollectionViewItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCollectionViewItemCell.m; sourceTree = "<group>"; };
+		5BB05A1E1C66260400813FD2 /* VBCollectionViewItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBCollectionViewItemView.h; sourceTree = "<group>"; };
+		5BB05A1F1C66260400813FD2 /* VBCollectionViewItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCollectionViewItemView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,9 +142,33 @@
 		5B0A3D371C6531BE00808F1D /* VBCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5B0A3D3B1C65389A00808F1D /* cell */,
+				5B0A3D3C1C65389A00808F1D /* headerFooter */,
+				5B0A3D381C6533D600808F1D /* VBCollectionViewController.h */,
+				5B0A3D391C6533D600808F1D /* VBCollectionViewController.m */,
 			);
 			name = VBCollectionViewController;
 			path = ../VBCollectionViewController;
+			sourceTree = "<group>";
+		};
+		5B0A3D3B1C65389A00808F1D /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				5B0A3D3D1C6538AD00808F1D /* VBCollectionViewCell.h */,
+				5B0A3D3E1C6538AD00808F1D /* VBCollectionViewCell.m */,
+				5B0A3D401C653CBD00808F1D /* VBCollectionViewItemCell.h */,
+				5B0A3D411C653CBD00808F1D /* VBCollectionViewItemCell.m */,
+				5BB05A1E1C66260400813FD2 /* VBCollectionViewItemView.h */,
+				5BB05A1F1C66260400813FD2 /* VBCollectionViewItemView.m */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		5B0A3D3C1C65389A00808F1D /* headerFooter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = headerFooter;
 			sourceTree = "<group>";
 		};
 		E0CE69C37D0C86DE66DF8829 /* Pods */ = {
@@ -295,8 +331,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B0A3D3F1C6538AD00808F1D /* VBCollectionViewCell.m in Sources */,
 				5B0A3D1A1C65245900808F1D /* ViewController.m in Sources */,
 				5B0A3D171C65245900808F1D /* AppDelegate.m in Sources */,
+				5BB05A201C66260400813FD2 /* VBCollectionViewItemView.m in Sources */,
+				5B0A3D421C653CBD00808F1D /* VBCollectionViewItemCell.m in Sources */,
+				5B0A3D3A1C6533D600808F1D /* VBCollectionViewController.m in Sources */,
 				5B0A3D141C65245900808F1D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

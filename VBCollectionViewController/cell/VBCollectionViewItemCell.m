@@ -57,4 +57,13 @@
     }
 }
 
+#pragma mark - size
++ (CGSize) estimatedSize {
+    return [self estimatedSizeWithItem:nil];
+}
+
++ (CGSize) estimatedSizeWithItem:(id)item {
+    return [[self itemViewClass] estimatedSizeWithItem:item];
+}
+
 @end

@@ -61,4 +61,9 @@
 - (void) updateUI {
 }
 
+#pragma mark - size
++ (CGSize) estimatedSizeWithItem:(id)item {
+    return CGSizeMake(50, 50);
+}
+
 @end

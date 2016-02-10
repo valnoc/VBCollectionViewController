@@ -50,4 +50,7 @@
  */
 - (void) updateUI;
 
+#pragma mark - size
++ (CGSize) estimatedSizeWithItem:(nullable id)item;
+
 @end

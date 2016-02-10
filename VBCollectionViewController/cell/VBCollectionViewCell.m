@@ -55,4 +55,9 @@
 - (void) setupUI {
 }
 
+#pragma mark - size
++ (CGSize) estimatedSize {
+    return CGSizeMake(50, 50);
+}
+
 @end

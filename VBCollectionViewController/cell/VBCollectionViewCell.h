@@ -41,4 +41,7 @@
  */
 - (void) setupUI;
 
+#pragma mark - size
++ (CGSize) estimatedSize;
+
 @end

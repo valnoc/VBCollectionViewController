@@ -43,4 +43,7 @@
  */
 @property (nonatomic, strong) VBCollectionViewItemView* itemView;
 
+#pragma mark - size
++ (CGSize) estimatedSizeWithItem:(id)item;
+
 @end

@@ -24,10 +24,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^VBCollectionViewSupplementaryViewSingleTapBlock)();
 /**
  *  VBCollectionViewSupplementaryView is a base class for collection header-footer.
  */
 @interface VBCollectionViewSupplementaryView : UICollectionReusableView
+
+@property (nonatomic, copy) VBCollectionViewSupplementaryViewSingleTapBlock onSingleTap;
 
 #pragma mark - reuse identifier
 /**

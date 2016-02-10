@@ -57,6 +57,18 @@
 
 #pragma mark - setup
 - (void) setupUI {
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(didTap)];
+    tapRecognizer.delaysTouchesEnded = YES;
+    [self addGestureRecognizer:tapRecognizer];
+}
+
+- (void) didTap {
+    if (self.onSingleTap) {
+        self.onSingleTap();
+    }
+}
+
 #pragma mark - size
 + (CGSize) estimatedSize {
     return CGSizeMake(50.0f, 50.0f);

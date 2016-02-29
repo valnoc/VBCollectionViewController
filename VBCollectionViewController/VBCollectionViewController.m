@@ -27,7 +27,7 @@
 #import <WZProtocolInterceptor/WZProtocolInterceptor.h>
 
 #import "VBCollectionViewCell.h"
-#import "VBCollectionViewSupplementaryView.h"
+#import "VBCollectionViewHeader.h"
 
 @interface VBCollectionViewController ()
 
@@ -70,13 +70,13 @@
 }
 
 - (void) registerClassForSupplementaryView:(Class) classToRegister {
-    if ([classToRegister isSubclassOfClass:[VBCollectionViewSupplementaryView class]]) {
+    if ([classToRegister isSubclassOfClass:[VBCollectionViewHeader class]]) {
         [self.collectionView registerClass:classToRegister
                 forSupplementaryViewOfKind:[classToRegister kindOfView]
                        withReuseIdentifier:[classToRegister reuseIdentifier]];
     }else{
         [self.collectionView registerClass:classToRegister
-                forSupplementaryViewOfKind:[VBCollectionViewSupplementaryView kindOfView]
+                forSupplementaryViewOfKind:[VBCollectionViewHeader kindOfView]
                        withReuseIdentifier:NSStringFromClass(classToRegister)];
     }
 }

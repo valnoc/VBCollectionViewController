@@ -24,33 +24,41 @@
 
 #import <UIKit/UIKit.h>
 
-/**
- *  VBCollectionViewCellView is a view to show entity.
- */
-@interface VBCollectionViewCellView : UIView
+#import "VBCollectionViewHeaderView.h"
 
 /**
- *  Setting of new item causes chain: prepareForReuse, updateUI, updateLayout
+ *  VBCollectionViewSupplementaryView is a base class for collection header-footer.
  */
-@property (nonatomic, strong, nullable) id item;
+@interface VBCollectionViewHeader : UICollectionReusableView
 
-#pragma mark - ui
+#pragma mark - reuse identifier
 /**
- *  Setup view UI - add and configure subviews.
+ *  @return Kind of view for reusability.
  */
-- (void) setupUI;
-
-/**
- *  Clear all item-dependent UI information.
- */
-- (void) prepareForReuse;
++ (NSString *) kindOfView;
 
 /**
- *  Update UI with current item.
+ *  @return Identifier for reusability.
  */
-- (void) updateUI;
++ (NSString *) reuseIdentifier;
+
+#pragma mark - itemView
+/**
+ *  Must be implemented in subclass.
+ *  A subclass of VBTableVIewItemView
+ *
+ *  @return Class
+ */
++ (Class) itemViewClass;
+
+/**
+ *  Is created automatically using itemViewClass. can be changed at any time.
+ */
+@property (nonatomic, strong) VBCollectionViewHeaderView* itemView;
 
 #pragma mark - size
-+ (CGSize) estimatedSizeWithItem:(nullable id)item;
++ (CGSize) estimatedSize;
+
++ (CGSize) estimatedSizeWithItem:(id)item;
 
 @end

@@ -17,6 +17,8 @@
 		5B0A3D3A1C6533D600808F1D /* VBCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0A3D391C6533D600808F1D /* VBCollectionViewController.m */; };
 		5BB180631C84E0FE004A81CE /* VBCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB180601C84E0FE004A81CE /* VBCollectionViewCell.m */; };
 		5BB180641C84E0FE004A81CE /* VBCollectionViewCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB180621C84E0FE004A81CE /* VBCollectionViewCellView.m */; };
+		5BB1806A1C84E16B004A81CE /* VBCollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB180671C84E16B004A81CE /* VBCollectionViewHeader.m */; };
+		5BB1806B1C84E16B004A81CE /* VBCollectionViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB180691C84E16B004A81CE /* VBCollectionViewHeaderView.m */; };
 		E08DFD4B112F722A1D11F299 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E507EB346B29E6BA3A5A40 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +55,10 @@
 		5BB180601C84E0FE004A81CE /* VBCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCollectionViewCell.m; sourceTree = "<group>"; };
 		5BB180611C84E0FE004A81CE /* VBCollectionViewCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBCollectionViewCellView.h; sourceTree = "<group>"; };
 		5BB180621C84E0FE004A81CE /* VBCollectionViewCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCollectionViewCellView.m; sourceTree = "<group>"; };
+		5BB180661C84E16B004A81CE /* VBCollectionViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBCollectionViewHeader.h; sourceTree = "<group>"; };
+		5BB180671C84E16B004A81CE /* VBCollectionViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCollectionViewHeader.m; sourceTree = "<group>"; };
+		5BB180681C84E16B004A81CE /* VBCollectionViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBCollectionViewHeaderView.h; sourceTree = "<group>"; };
+		5BB180691C84E16B004A81CE /* VBCollectionViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCollectionViewHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB1805E1C84E0FE004A81CE /* cell */,
+				5BB180651C84E16B004A81CE /* headerView */,
 				5B0A3D381C6533D600808F1D /* VBCollectionViewController.h */,
 				5B0A3D391C6533D600808F1D /* VBCollectionViewController.m */,
 			);
@@ -156,6 +163,17 @@
 				5BB180621C84E0FE004A81CE /* VBCollectionViewCellView.m */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		5BB180651C84E16B004A81CE /* headerView */ = {
+			isa = PBXGroup;
+			children = (
+				5BB180661C84E16B004A81CE /* VBCollectionViewHeader.h */,
+				5BB180671C84E16B004A81CE /* VBCollectionViewHeader.m */,
+				5BB180681C84E16B004A81CE /* VBCollectionViewHeaderView.h */,
+				5BB180691C84E16B004A81CE /* VBCollectionViewHeaderView.m */,
+			);
+			path = headerView;
 			sourceTree = "<group>";
 		};
 		E0CE69C37D0C86DE66DF8829 /* Pods */ = {
@@ -320,6 +338,8 @@
 			files = (
 				5BB180631C84E0FE004A81CE /* VBCollectionViewCell.m in Sources */,
 				5B0A3D1A1C65245900808F1D /* ViewController.m in Sources */,
+				5BB1806B1C84E16B004A81CE /* VBCollectionViewHeaderView.m in Sources */,
+				5BB1806A1C84E16B004A81CE /* VBCollectionViewHeader.m in Sources */,
 				5B0A3D171C65245900808F1D /* AppDelegate.m in Sources */,
 				5B0A3D3A1C6533D600808F1D /* VBCollectionViewController.m in Sources */,
 				5B0A3D141C65245900808F1D /* main.m in Sources */,

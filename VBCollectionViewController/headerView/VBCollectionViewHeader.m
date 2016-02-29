@@ -22,35 +22,55 @@
 //    SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "VBCollectionViewHeader.h"
 
-/**
- *  VBCollectionViewCellView is a view to show entity.
- */
-@interface VBCollectionViewCellView : UIView
+#import <VBInvalidClassException.h>
+#import <VBAutolayout.h>
 
-/**
- *  Setting of new item causes chain: prepareForReuse, updateUI, updateLayout
- */
-@property (nonatomic, strong, nullable) id item;
+@implementation VBCollectionViewHeader
 
-#pragma mark - ui
-/**
- *  Setup view UI - add and configure subviews.
- */
-- (void) setupUI;
+- (instancetype) init {
+    self = [super init];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
 
-/**
- *  Clear all item-dependent UI information.
- */
-- (void) prepareForReuse;
+- (instancetype) initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
 
-/**
- *  Update UI with current item.
- */
-- (void) updateUI;
+#pragma mark - reuse identifier
+- (NSString *) reuseIdentifier {
+    return [self.class reuseIdentifier];
+}
+
++ (NSString *) reuseIdentifier {
+    return NSStringFromClass([self class]);
+}
+
++ (NSString *) kindOfView {
+    return UICollectionElementKindSectionHeader;
+}
+
+#pragma mark - setup
+- (void) setupUI {
+    if ([self.class itemViewClass]) {
+        self.itemView = [[[self.class itemViewClass] alloc] initWithFrame:self.bounds];
+        if ([self.itemView isKindOfClass:[VBCollectionViewHeaderView class]] == NO) {
+            @throw [VBInvalidClassException exception];
+        }
+    }
+}
 
 #pragma mark - size
-+ (CGSize) estimatedSizeWithItem:(nullable id)item;
++ (CGSize) estimatedSize {
+    return CGSizeMake(50.0f, 50.0f);
+}
 
 @end

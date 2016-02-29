@@ -22,35 +22,59 @@
 //    SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "VBCollectionViewHeaderView.h"
 
-/**
- *  VBCollectionViewCellView is a view to show entity.
- */
-@interface VBCollectionViewCellView : UIView
+@implementation VBCollectionViewHeaderView
 
-/**
- *  Setting of new item causes chain: prepareForReuse, updateUI, updateLayout
- */
-@property (nonatomic, strong, nullable) id item;
+- (instancetype) init {
+    self = [super init];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
+
+- (instancetype) initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
+
+#pragma mark - item
+- (void) setItem:(id)item {
+    _item = item;
+    
+    [self prepareForReuse];
+    [self updateUI];
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
 
 #pragma mark - ui
-/**
- *  Setup view UI - add and configure subviews.
- */
-- (void) setupUI;
+- (void) setupUI {
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(didTap)];
+    tapRecognizer.delaysTouchesEnded = YES;
+    [self addGestureRecognizer:tapRecognizer];
+}
 
-/**
- *  Clear all item-dependent UI information.
- */
-- (void) prepareForReuse;
+- (void) didTap {
+    if (self.onSingleTap) {
+        self.onSingleTap();
+    }
+}
 
-/**
- *  Update UI with current item.
- */
-- (void) updateUI;
+- (void) prepareForReuse {
+}
+- (void) updateUI {
+}
 
 #pragma mark - size
-+ (CGSize) estimatedSizeWithItem:(nullable id)item;
++ (CGSize) estimatedSizeWithItem:(id)item {
+    return CGSizeMake(50, 50);
+}
 
 @end

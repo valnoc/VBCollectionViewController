@@ -22,17 +22,19 @@
 //    SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "VBCollectionViewHeader.h"
+
+typedef void(^VBCollectionViewHeaderViewSingleTapBlock)();
 
 /**
- *  VBCollectionViewCellView is a view to show entity.
+ *  VBCollectionViewSupplementaryItemView is a header-footer view to show entity.
  */
-@interface VBCollectionViewCellView : UIView
+@interface VBCollectionViewHeaderView : UIView
 
 /**
  *  Setting of new item causes chain: prepareForReuse, updateUI, updateLayout
  */
-@property (nonatomic, strong, nullable) id item;
+@property (nonatomic, strong) id item;
 
 #pragma mark - ui
 /**
@@ -50,7 +52,9 @@
  */
 - (void) updateUI;
 
+@property (nonatomic, copy) VBCollectionViewHeaderViewSingleTapBlock onSingleTap;
+
 #pragma mark - size
-+ (CGSize) estimatedSizeWithItem:(nullable id)item;
++ (CGSize) estimatedSizeWithItem:(id)item;
 
 @end

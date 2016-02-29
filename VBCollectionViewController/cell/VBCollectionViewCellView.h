@@ -22,48 +22,35 @@
 //    SOFTWARE.
 //
 
-#import "VBCollectionViewItemView.h"
+#import <UIKit/UIKit.h>
 
-@implementation VBCollectionViewItemView
+/**
+ *  VBCollectionViewItemView is a view to show entity.
+ */
+@interface VBCollectionViewCellView : UIView
 
-- (instancetype) init {
-    self = [super init];
-    if (self) {
-        [self setupUI];
-    }
-    return self;
-}
-
-- (instancetype) initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setupUI];
-    }
-    return self;
-}
-
-#pragma mark - item
-- (void) setItem:(id)item {
-    _item = item;
-    
-    [self prepareForReuse];
-    [self updateUI];
-    
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
-}
+/**
+ *  Setting of new item causes chain: prepareForReuse, updateUI, updateLayout
+ */
+@property (nonatomic, strong, nullable) id item;
 
 #pragma mark - ui
-- (void) setupUI {
-}
-- (void) prepareForReuse {
-}
-- (void) updateUI {
-}
+/**
+ *  Setup view UI - add and configure subviews.
+ */
+- (void) setupUI;
+
+/**
+ *  Clear all item-dependent UI information.
+ */
+- (void) prepareForReuse;
+
+/**
+ *  Update UI with current item.
+ */
+- (void) updateUI;
 
 #pragma mark - size
-+ (CGSize) estimatedSizeWithItem:(id)item {
-    return CGSizeMake(50, 50);
-}
++ (CGSize) estimatedSizeWithItem:(nullable id)item;
 
 @end

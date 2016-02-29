@@ -22,28 +22,48 @@
 //    SOFTWARE.
 //
 
-#import "VBCollectionViewCell.h"
+#import "VBCollectionViewCellView.h"
 
-#import "VBCollectionViewItemView.h"
-/**
- *  VBCollectionViewItemCell is a cell constructed to show entity instance via itemView.
- */
-@interface VBCollectionViewItemCell : VBCollectionViewCell
+@implementation VBCollectionViewCellView
 
-/**
- *  Must be implemented in subclass.
- *  A subclass of VBTableVIewItemView
- *
- *  @return Class
- */
-+ (Class) itemViewClass;
+- (instancetype) init {
+    self = [super init];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
 
-/**
- *  Is created automatically using itemViewClass. can be changed at any time.
- */
-@property (nonatomic, strong) VBCollectionViewItemView* itemView;
+- (instancetype) initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
+
+#pragma mark - item
+- (void) setItem:(id)item {
+    _item = item;
+    
+    [self prepareForReuse];
+    [self updateUI];
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
+
+#pragma mark - ui
+- (void) setupUI {
+}
+- (void) prepareForReuse {
+}
+- (void) updateUI {
+}
 
 #pragma mark - size
-+ (CGSize) estimatedSizeWithItem:(id)item;
++ (CGSize) estimatedSizeWithItem:(id)item {
+    return CGSizeMake(50, 50);
+}
 
 @end

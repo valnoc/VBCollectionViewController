@@ -24,6 +24,9 @@
 
 #import "VBCollectionViewCell.h"
 
+#import <VBInvalidClassException.h>
+#import <VBAutolayout.h>
+
 @implementation VBCollectionViewCell
 
 - (instancetype) init {
@@ -53,11 +56,35 @@
 
 #pragma mark - setup
 - (void) setupUI {
+    if ([self.class itemViewClass]) {
+        self.itemView = [[[self.class itemViewClass] alloc] initWithFrame:self.contentView.bounds];
+        if ([self.itemView isKindOfClass:[VBCollectionViewCellView class]] == NO) {
+            @throw [VBInvalidClassException exception];
+        }
+    }
+}
+
+- (void) setItemView:(VBCollectionViewCellView *)itemView {
+    _itemView = itemView;
+    
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    if (self.itemView) {
+        [self.contentView addSubview:self.itemView
+                          withLayout:@{VBAutolayoutAttributeTop:        @"0",
+                                       VBAutolayoutAttributeBottom:     @"0@999",
+                                       VBAutolayoutAttributeLeading:    @"0",
+                                       VBAutolayoutAttributeTrailing:   @"0"}];
+    }
 }
 
 #pragma mark - size
 + (CGSize) estimatedSize {
-    return CGSizeMake(50, 50);
+    return [self estimatedSizeWithItem:nil];
+}
+
++ (CGSize) estimatedSizeWithItem:(id)item {
+    return [[self itemViewClass] estimatedSizeWithItem:item];
 }
 
 @end

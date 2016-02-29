@@ -24,8 +24,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "VBCollectionViewCellView.h"
+
 /**
- *  VBCollectionViewCell is a base class for collection cell.
+ *  VBCollectionViewCell is a cell constructed to show entity instance via itemView.
  */
 @interface VBCollectionViewCell : UICollectionViewCell
 
@@ -33,15 +35,25 @@
 /**
  *  @return Identifier for reusability.
  */
-+ (nonnull NSString *) reuseIdentifier;
++ (NSString *) reuseIdentifier;
 
-#pragma mark - setup
+#pragma mark - itemView
 /**
- *  Implement in subclass for manual ui constructing.
+ *  Must be implemented in subclass.
+ *  A subclass of VBTableVIewItemView
+ *
+ *  @return Class
  */
-- (void) setupUI;
++ (Class) itemViewClass;
+
+/**
+ *  Is created automatically using itemViewClass. can be changed at any time.
+ */
+@property (nonatomic, strong) VBCollectionViewCellView* itemView;
 
 #pragma mark - size
 + (CGSize) estimatedSize;
+
++ (CGSize) estimatedSizeWithItem:(id)item;
 
 @end

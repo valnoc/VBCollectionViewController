@@ -66,4 +66,15 @@
  */
 - (void) registerClassForSupplementaryView:(Class) classToRegister;
 
+#pragma mark - pagination
+/**
+ * If pagination is enabled, activity indicator will be used as tableFooterView. Delegate will be notified with <i>-tableViewDidScrollToNextPage:</i>
+ */
+@property (nonatomic, assign) BOOL paginationEnabled;
+
+/**
+ * Setting this property to YES blocks delegate calls, but do not hide activity indicator.
+ */
+@property (nonatomic, assign) BOOL paginationIsLoadingNextPage;
+
 @end

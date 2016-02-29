@@ -22,7 +22,7 @@
 //    SOFTWARE.
 //
 
-#import "VBCollectionViewHeader.h"
+#import <UIKit/UIKit.h>
 
 typedef void(^VBCollectionViewHeaderViewSingleTapBlock)();
 

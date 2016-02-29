@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "VBCollectionViewController"
-  s.version          = "0.1.0"
+  s.version          = "0.2.0"
   s.summary          = "VBCollectionViewController"
   s.description      = <<-DESC
 VBCollectionViewController extends UICollectionViewController by adding pagination, pull-to-refresh and other useful features.

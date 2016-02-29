@@ -24,8 +24,8 @@
 
 #import "VBCollectionViewHeader.h"
 
-#import <VBInvalidClassException.h>
-#import <VBAutolayout.h>
+#import "VBInvalidClassException.h"
+#import "VBAutolayout.h"
 
 @implementation VBCollectionViewHeader
 
@@ -68,9 +68,31 @@
     }
 }
 
++ (Class)itemViewClass {
+    return [VBCollectionViewHeaderView class];
+}
+
+- (void) setItemView:(VBCollectionViewHeaderView *)itemView {
+    _itemView = itemView;
+    
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    if (self.itemView) {
+        [self addSubview:self.itemView
+              withLayout:@{VBAutolayoutAttributeTop:        @"0",
+                           VBAutolayoutAttributeBottom:     @"0@999",
+                           VBAutolayoutAttributeLeading:    @"0",
+                           VBAutolayoutAttributeTrailing:   @"0@999"}];
+    }
+}
+
 #pragma mark - size
 + (CGSize) estimatedSize {
-    return CGSizeMake(50.0f, 50.0f);
+    return [self estimatedSizeWithItem:nil];
+}
+
++ (CGSize) estimatedSizeWithItem:(id)item {
+    return [[self itemViewClass] estimatedSizeWithItem:item];
 }
 
 @end

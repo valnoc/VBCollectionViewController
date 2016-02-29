@@ -24,8 +24,8 @@
 
 #import "VBCollectionViewCell.h"
 
-#import <VBInvalidClassException.h>
-#import <VBAutolayout.h>
+#import "VBInvalidClassException.h"
+#import "VBAutolayout.h"
 
 @implementation VBCollectionViewCell
 
@@ -64,6 +64,10 @@
     }
 }
 
++ (Class)itemViewClass {
+    return [VBCollectionViewCellView class];
+}
+
 - (void) setItemView:(VBCollectionViewCellView *)itemView {
     _itemView = itemView;
     
@@ -74,7 +78,7 @@
                           withLayout:@{VBAutolayoutAttributeTop:        @"0",
                                        VBAutolayoutAttributeBottom:     @"0@999",
                                        VBAutolayoutAttributeLeading:    @"0",
-                                       VBAutolayoutAttributeTrailing:   @"0"}];
+                                       VBAutolayoutAttributeTrailing:   @"0@999"}];
     }
 }
 

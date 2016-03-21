@@ -31,7 +31,7 @@
 @protocol VBCollectionViewDelegate <UICollectionViewDelegate>
 
 @optional
-- (void) collectionViewDidScrollToNextPage:(UITableView*)tableView;
+- (void) collectionViewDidScrollToNextPage:(UICollectionView*) collectionView;
 //- (void) collectionViewDidStartPullToRefresh:(UITableView*)tableView;
 
 @end

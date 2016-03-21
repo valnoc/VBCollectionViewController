@@ -33,6 +33,9 @@
 
 @property (nonatomic, strong) WZProtocolInterceptor* delegateInterceptor;
 
+@property (nonatomic, strong) WZProtocolInterceptor* dataSourceInterceptor;
+@property (nonatomic, assign) NSInteger numOfSections;
+
 @end
 
 @implementation VBCollectionViewController
@@ -46,7 +49,12 @@
 #pragma mark - dataSource/delegate
 - (void) setDataSource:(id<VBCollectionViewDataSource>)dataSource {
     _dataSource = dataSource;
-    self.collectionView.dataSource = dataSource;
+    
+    self.dataSourceInterceptor = [[WZProtocolInterceptor alloc] initWithInterceptedProtocol:@protocol(VBCollectionViewDataSource)];
+    self.dataSourceInterceptor.middleMan = self;
+    self.dataSourceInterceptor.receiver = dataSource;
+    
+    self.collectionView.dataSource = (id<UICollectionViewDataSource>)self.dataSourceInterceptor;
 }
 - (void) setDelegate:(id<VBCollectionViewDelegate>)delegate {
     _delegate = delegate;
@@ -90,6 +98,122 @@
         [self.collectionView registerClass:classToRegister
                 forSupplementaryViewOfKind:[VBCollectionViewHeader kindOfView]
                        withReuseIdentifier:NSStringFromClass(classToRegister)];
+    }
+}
+
+#pragma mark - pagination
+- (void) setPaginationEnabled:(BOOL)paginationEnabled {
+    if ([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        _paginationEnabled = paginationEnabled;
+        [self.collectionView reloadData];
+    }
+    else{
+        _paginationEnabled = NO;
+    }
+}
+
+- (void) paginationOffsetCheck:(CGPoint)contentOffset {
+    BOOL nextPage = NO;
+    if (self.paginationEnabled &&
+        self.paginationIsLoadingNextPage == NO) {
+        if (((UICollectionViewFlowLayout*)self.collectionViewLayout).scrollDirection == UICollectionViewScrollDirectionVertical) {
+            nextPage = [self contentOffsetYAtBottom:contentOffset.y];
+        }
+        else{
+#warning TODO
+        }
+    }
+    
+    if (nextPage) {
+        if ([self.delegate respondsToSelector:@selector(collectionViewDidScrollToNextPage:)]) {
+            [self.delegate collectionViewDidScrollToNextPage:self.collectionView];
+        }
+    }
+}
+- (BOOL) contentOffsetYAtBottom:(CGFloat)contentOffsetY {
+    double screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    double bottomOffset = self.collectionView.contentSize.height - self.collectionView.bounds.size.height - contentOffsetY;
+    return bottomOffset <= (screenHeight / 4.0f);
+}
+
+#pragma mark - UICollectionViewDataSource
+- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    NSInteger numOfSections = 1;
+    if ([self.dataSource respondsToSelector:@selector(numberOfSectionsInCollectionView:)]) {
+        [self.dataSource numberOfSectionsInCollectionView:collectionView];
+    }
+    self.numOfSections = numOfSections;
+    return numOfSections;
+}
+
+- (UICollectionReusableView *) collectionView:(UICollectionView *)collectionView
+            viewForSupplementaryElementOfKind:(NSString *)kind
+                                  atIndexPath:(NSIndexPath *)indexPath {
+    if (self.paginationEnabled &&
+        indexPath.section == (self.numOfSections - 1) &&
+        [kind isEqualToString:UICollectionElementKindSectionFooter]) {
+        
+        UICollectionReusableView* footerPagination = nil;
+        NSString* footerPaginationReuseIdentifier = @"footerPaginationReuseIdentifier";
+        @try {
+            footerPagination = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                  withReuseIdentifier:footerPaginationReuseIdentifier
+                                                                         forIndexPath:indexPath];
+        }
+        @catch (NSException *exception) {
+            [collectionView registerClass:[UICollectionReusableView class]
+               forCellWithReuseIdentifier:footerPaginationReuseIdentifier];
+            footerPagination = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                  withReuseIdentifier:footerPaginationReuseIdentifier
+                                                                         forIndexPath:indexPath];
+            footerPagination.backgroundColor = [UIColor clearColor];
+            
+            UIActivityIndicatorView* aiv = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            [aiv startAnimating];
+            [footerPagination addSubview:aiv];
+            aiv.center = CGPointMake(footerPagination.bounds.size.width / 2, footerPagination.bounds.size.height / 2);
+        }
+        return footerPagination;
+    }
+    else{
+        if ([self.dataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+            return [self.dataSource collectionView:collectionView
+                 viewForSupplementaryElementOfKind:kind
+                                       atIndexPath:indexPath];
+        }
+    }
+    return nil;
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self paginationOffsetCheck:scrollView.contentOffset];
+
+    if ([self.delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
+        [self.delegate scrollViewDidEndDecelerating:scrollView];
+    }
+}
+
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView
+                   willDecelerate:(BOOL)decelerate {
+    [self paginationOffsetCheck:scrollView.contentOffset];
+    
+    if ([self.delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
+        [self.delegate scrollViewDidEndDragging:scrollView
+                                 willDecelerate:decelerate];
+    }
+}
+
+- (void) scrollViewWillEndDragging:(UIScrollView *)scrollView
+                      withVelocity:(CGPoint)velocity
+               targetContentOffset:(inout CGPoint *)targetContentOffset {
+    [self paginationOffsetCheck:CGPointMake(targetContentOffset->x,
+                                            targetContentOffset->y)];
+    
+    if ([self.delegate respondsToSelector:@selector(scrollViewWillEndDragging:withVelocity:targetContentOffset:)]) {
+        [self.delegate scrollViewWillEndDragging:scrollView
+                                    withVelocity:velocity
+                             targetContentOffset:targetContentOffset];
     }
 }
 

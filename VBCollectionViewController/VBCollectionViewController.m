@@ -59,6 +59,12 @@
 }
 
 #pragma mark - collection
+- (void) registerClassesForCells:(NSArray<Class>*) classesToRegister {
+    __weak typeof(self) __self = self;
+    [classesToRegister enumerateObjectsUsingBlock:^(Class  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [__self registerClassForCell:obj];
+    }];
+}
 - (void) registerClassForCell:(Class) classToRegister {
     if ([classToRegister isSubclassOfClass:[VBCollectionViewCell class]]) {
         [self.collectionView registerClass:classToRegister
@@ -69,6 +75,12 @@
     }
 }
 
+- (void) registerClassesForSupplementaryViews:(NSArray<Class>*) classesToRegister {
+    __weak typeof(self) __self = self;
+    [classesToRegister enumerateObjectsUsingBlock:^(Class  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [__self registerClassForSupplementaryView:obj];
+    }];
+}
 - (void) registerClassForSupplementaryView:(Class) classToRegister {
     if ([classToRegister isSubclassOfClass:[VBCollectionViewHeader class]]) {
         [self.collectionView registerClass:classToRegister

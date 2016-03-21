@@ -60,11 +60,21 @@
 - (void) registerClassForCell:(Class) classToRegister;
 
 /**
+ * Register several classes at once.
+ */
+- (void) registerClassesForCells:(NSArray<Class>*) classesToRegister;
+
+/**
  * A short version of "register class for reuse identifier".
  * Calls +reuseIdetifier if classToRegister is a subclass of VBCollectionSupplementaryView.
  * Else - uses stringFromClass as identifier.
  */
 - (void) registerClassForSupplementaryView:(Class) classToRegister;
+
+/**
+ * Register several classes at once.
+ */
+- (void) registerClassesForSupplementaryViews:(NSArray<Class>*) classesToRegister;
 
 #pragma mark - pagination
 /**

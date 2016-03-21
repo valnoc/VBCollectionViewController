@@ -120,7 +120,7 @@
             nextPage = [self contentOffsetYAtBottom:contentOffset.y];
         }
         else{
-#warning TODO
+            nextPage = [self contentOffsetXAtRight:contentOffset.x];
         }
     }
     
@@ -131,9 +131,14 @@
     }
 }
 - (BOOL) contentOffsetYAtBottom:(CGFloat)contentOffsetY {
-    double screenHeight = [[UIScreen mainScreen] bounds].size.height;
-    double bottomOffset = self.collectionView.contentSize.height - self.collectionView.bounds.size.height - contentOffsetY;
-    return bottomOffset <= (screenHeight / 4.0f);
+    double collectionHeight = self.collectionView.bounds.size.height;
+    double bottomOffset = self.collectionView.contentSize.height - collectionHeight - contentOffsetY;
+    return bottomOffset <= (collectionHeight / 4.0f);
+}
+- (BOOL) contentOffsetXAtRight:(CGFloat)contentOffsetX {
+    double collectionWidth = self.collectionView.bounds.size.width;
+    double rightOffset = self.collectionView.contentSize.width - collectionWidth - contentOffsetX;
+    return rightOffset <= (collectionWidth / 2.0f);
 }
 
 #pragma mark - UICollectionViewDataSource

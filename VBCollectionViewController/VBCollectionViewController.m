@@ -59,7 +59,7 @@
 - (void) setDelegate:(id<VBCollectionViewDelegate>)delegate {
     _delegate = delegate;
     
-    self.delegateInterceptor = [[WZProtocolInterceptor alloc] initWithInterceptedProtocol:@protocol(VBCollectionViewDelegate)];
+    self.delegateInterceptor = [[WZProtocolInterceptor alloc] initWithInterceptedProtocols:@protocol(VBCollectionViewDelegate), @protocol(UICollectionViewDelegateFlowLayout), nil];
     self.delegateInterceptor.middleMan = self;
     self.delegateInterceptor.receiver = delegate;
     
@@ -145,10 +145,22 @@
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     NSInteger numOfSections = 1;
     if ([self.dataSource respondsToSelector:@selector(numberOfSectionsInCollectionView:)]) {
-        [self.dataSource numberOfSectionsInCollectionView:collectionView];
+        numOfSections = [self.dataSource numberOfSectionsInCollectionView:collectionView];
     }
     self.numOfSections = numOfSections;
     return numOfSections;
+}
+
+- (NSInteger) collectionView:(UICollectionView *)collectionView
+      numberOfItemsInSection:(NSInteger)section {
+    return [self.dataSource collectionView:collectionView
+                    numberOfItemsInSection:section];
+}
+
+- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView
+                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.dataSource collectionView:collectionView
+                    cellForItemAtIndexPath:indexPath];
 }
 
 - (UICollectionReusableView *) collectionView:(UICollectionView *)collectionView
@@ -167,7 +179,8 @@
         }
         @catch (NSException *exception) {
             [collectionView registerClass:[UICollectionReusableView class]
-               forCellWithReuseIdentifier:footerPaginationReuseIdentifier];
+               forSupplementaryViewOfKind:kind
+                      withReuseIdentifier:footerPaginationReuseIdentifier];
             footerPagination = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                                   withReuseIdentifier:footerPaginationReuseIdentifier
                                                                          forIndexPath:indexPath];
@@ -188,6 +201,21 @@
         }
     }
     return nil;
+}
+
+- (CGSize) collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout*)collectionViewLayout
+referenceSizeForFooterInSection:(NSInteger)section {
+    if (self.paginationEnabled &&
+        section == (self.numOfSections - 1)) {
+        return CGSizeMake(self.collectionView.bounds.size.width, 44);
+    }
+    else if ([self.delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForFooterInSection:)]) {
+        return [self.delegate collectionView:collectionView
+                                      layout:collectionViewLayout
+             referenceSizeForFooterInSection:section];
+    }
+    return CGSizeZero;
 }
 
 #pragma mark - UICollectionViewDelegate

@@ -28,7 +28,7 @@
 
 @end
 
-@protocol VBCollectionViewDelegate <UICollectionViewDelegate>
+@protocol VBCollectionViewDelegate <UICollectionViewDelegateFlowLayout>
 
 @optional
 - (void) collectionViewDidScrollToNextPage:(UICollectionView*) collectionView;

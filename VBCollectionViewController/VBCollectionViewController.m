@@ -36,6 +36,8 @@
 @property (nonatomic, strong) WZProtocolInterceptor* dataSourceInterceptor;
 @property (nonatomic, assign) NSInteger numOfSections;
 
+@property (nonatomic, strong) UIRefreshControl* p2rControl;
+
 @end
 
 @implementation VBCollectionViewController
@@ -99,6 +101,37 @@
                 forSupplementaryViewOfKind:[VBCollectionViewHeader kindOfView]
                        withReuseIdentifier:NSStringFromClass(classToRegister)];
     }
+}
+
+#pragma mark - pullToRefresh
+- (void) setPullToRefreshEnabled:(BOOL)pullToRefreshEnabled {
+    _pullToRefreshEnabled = pullToRefreshEnabled;
+    
+    if (_pullToRefreshEnabled) {
+        UIRefreshControl* p2rCtrl = [UIRefreshControl new];
+        [p2rCtrl addTarget:self
+                    action:@selector(pullToRefreshEvent:)
+          forControlEvents:UIControlEventValueChanged];
+        self.p2rControl = p2rCtrl;
+        [self.collectionView addSubview:self.p2rControl];
+        
+    }else{
+        [self.p2rControl removeFromSuperview];
+        self.p2rControl = nil;
+    }
+}
+
+- (void) pullToRefreshEvent:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(collectionViewDidStartPullToRefresh:)]) {
+        [self.delegate collectionViewDidStartPullToRefresh:self.collectionView];
+    }
+}
+
+- (void) beginPullToRefresh {
+    [self.p2rControl beginRefreshing];
+}
+- (void) endPullToRefresh {
+    [self.p2rControl endRefreshing];
 }
 
 #pragma mark - pagination

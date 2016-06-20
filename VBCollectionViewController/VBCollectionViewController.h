@@ -32,7 +32,7 @@
 
 @optional
 - (void) collectionViewDidScrollToNextPage:(UICollectionView*) collectionView;
-//- (void) collectionViewDidStartPullToRefresh:(UITableView*)tableView;
+- (void) collectionViewDidStartPullToRefresh:(UICollectionView*) collectionView;
 
 @end
 
@@ -86,5 +86,21 @@
  * Setting this property to YES blocks delegate calls, but do not hide activity indicator.
  */
 @property (nonatomic, assign) BOOL paginationIsLoadingNextPage;
+
+#pragma mark - pullToRefresh
+/**
+ * If pullToRefresh is enabled, the standard UIRefreshControl is used as self.refreshControl.
+ */
+@property (nonatomic, assign) BOOL pullToRefreshEnabled;
+
+/**
+ * Updates the refreshControl state.
+ */
+- (void) beginPullToRefresh;
+
+/**
+ * Updates the refreshControl state.
+ */
+- (void) endPullToRefresh;
 
 @end

@@ -51,6 +51,17 @@
  */
 @property (nonatomic, weak) id<VBCollectionViewDelegate> delegate;
 
+#pragma mark - flow layout
+/**
+ * Fast creation.
+ */
++ (instancetype) collectionFlowLayout;
+
+/**
+ * Layout cast.
+ */
+- (UICollectionViewFlowLayout*) flowLayout;
+
 #pragma mark - collection
 /**
  * A short version of "register class for reuse identifier".

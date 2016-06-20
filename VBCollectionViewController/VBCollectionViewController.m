@@ -68,6 +68,22 @@
     self.collectionView.delegate = (id<UICollectionViewDelegate>)self.delegateInterceptor;
 }
 
+#pragma mark - flow layout
+/**
+ * Fast creation.
+ */
++ (instancetype) collectionFlowLayout {
+    UICollectionViewFlowLayout* layout = [UICollectionViewFlowLayout new];
+    return [[self alloc] initWithCollectionViewLayout:layout];
+}
+
+/**
+ * Layout cast.
+ */
+- (UICollectionViewFlowLayout*) flowLayout {
+    return (UICollectionViewFlowLayout*)self.collectionViewLayout;
+}
+
 #pragma mark - collection
 - (void) registerClassesForCells:(NSArray<Class>*) classesToRegister {
     __weak typeof(self) __self = self;
@@ -149,7 +165,7 @@
     BOOL nextPage = NO;
     if (self.paginationEnabled &&
         self.paginationIsLoadingNextPage == NO) {
-        if (((UICollectionViewFlowLayout*)self.collectionViewLayout).scrollDirection == UICollectionViewScrollDirectionVertical) {
+        if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionVertical) {
             nextPage = [self contentOffsetYAtBottom:contentOffset.y];
         }
         else{

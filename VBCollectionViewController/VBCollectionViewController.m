@@ -155,6 +155,13 @@
     if ([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
         _paginationEnabled = paginationEnabled;
         [self.collectionView reloadData];
+        
+        if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+            self.collectionView.alwaysBounceHorizontal = YES;
+        }
+        else{
+            self.collectionView.alwaysBounceVertical = YES;
+        }        
     }
     else{
         _paginationEnabled = NO;

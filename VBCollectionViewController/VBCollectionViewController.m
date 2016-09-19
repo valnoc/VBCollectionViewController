@@ -130,7 +130,7 @@
           forControlEvents:UIControlEventValueChanged];
         self.p2rControl = p2rCtrl;
         [self.collectionView addSubview:self.p2rControl];
-        
+        self.collectionView.alwaysBounceVertical = YES;
     }else{
         [self.p2rControl removeFromSuperview];
         self.p2rControl = nil;
@@ -147,7 +147,9 @@
     [self.p2rControl beginRefreshing];
 }
 - (void) endPullToRefresh {
-    [self.p2rControl endRefreshing];
+    if (self.p2rControl.isRefreshing) {
+        [self.p2rControl endRefreshing];
+    }
 }
 
 #pragma mark - pagination
